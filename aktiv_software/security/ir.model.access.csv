@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+aktiv_software.access_employee_details,access_employee_details,aktiv_software.model_employee_details,base.group_user,1,1,1,1
+aktiv_software.access_employee_position,access_employee_position,aktiv_software.model_employee_position,base.group_user,1,1,1,1
+aktiv_software.access_company_department,access_company_department,aktiv_software.model_company_department,base.group_user,1,1,1,1
+aktiv_software.access_employee_salary,access_employee_salary,aktiv_software.model_employee_salary,base.group_user,1,1,1,1

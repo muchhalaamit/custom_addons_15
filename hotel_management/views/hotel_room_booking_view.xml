@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="hotel_room_booking_tree_view">
+		<field name="name">hotel.room.booking.tree.view</field>
+		<field name="model">hotel.room.booking</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="hotel_name_id"/>
+				<field name="customer_name_id"/>
+				<field name="customer_contact"/>
+				<field name="check_in_datetime"/>
+				<field name="check_out_datetime"/>
+				<field name="state" widget="badge" decoration-info="state == 'draft'"  decoration-danger="state == 'cancel'" decoration-success="state == 'booked'"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="hotel_room_booking_form_view">
+		<field name="name">hotel.room.booking.form.view</field>
+		<field name="model">hotel.room.booking</field>
+		<field name="arch" type="xml">
+			<form>
+				<header>
+					<button name="hotel_room_book" class="oe_highlight" states="draft" string="Book" type="object"/>
+					<button name="hotel_room_cancel" class="oe_highlight" states="booked" string="Cancle" type="object"/>
+					<button name="room_booking_mail" class="oe_highlight" string="Send Booking Email" type="object"/>
+					<field name="state" widget="statusbar" statusbar_visible="draft,booked,cancel"/>
+				</header>
+				<sheet>
+					<group>
+						<group>
+							<field name="hotel_name_id"/>
+							<field name="customer_name_id"/>
+							<field name="customer_contact"/>
+						</group>
+						<group>
+							<field name="customer_address"/>
+							<field name="check_in_datetime"/>
+							<field name="check_out_datetime"/>
+						</group>
+					</group>
+					<notebook>
+                    <page string="Booking Details">
+                        <field name="hotel_room_booking_line_ids" widget="one2many_list" context="{'data': hotel_name_id}">
+                            <tree editable="bottom">
+                                <field name="number_of_adults"/>
+                                <field name="number_of_children"/>
+                                <field name="hotel_room" context="{'record': context.get('data')}"/>
+                                <field name="price"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_hotel_room_booking" model="ir.actions.act_window">
+		<field name="name">Booking</field>
+		<field name="res_model">hotel.room.booking</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="hotel_room_booking"
+		name="Booking"
+		parent="hotel_management"
+		action="action_hotel_room_booking"
+		sequence="4"/>
+	</data>
+</odoo>

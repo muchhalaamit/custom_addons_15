@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="checkout_reminder_mail_id" model="mail.template">
+		<field name="name">Checkout Reminder</field>
+		<field name="model_id" ref="model_hotel_room_booking"/>
+		<field name="email_from">{{object.customer_name_id.email}}</field>
+		<field name="email_to">{{object.customer_name_id.email}}</field>
+		<field name="subject">Checkout Reminder</field>
+		<field name="body_html" type="html">
+			<div>
+				<p>Hello <t t-out="object.customer_name_id.name"/>,
+				<br/>
+				<br/>
+				This mail is sent to inform you that one hour left for checkout.
+				</p>
+			</div>
+		</field>
+	</record>
+</odoo>

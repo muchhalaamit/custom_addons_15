@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="respartner_data" name="ResPartner">
+		<!-- <t t-call="web.html_container"> -->
+			<t t-call="website.layout">
+				<div class="container" style="backgroung-image:url('/demo_controller/static/src/img/chicago.jpg');background-position: 50% 0;">
+					<div class="row border">
+						<table class="table table-striped">
+							<tr>
+								<th>sr no.</th>
+								<th>Name</th>
+								<th>phone</th>
+							</tr>
+							<t t-set="your_variable" t-value="1"/>
+							<t t-foreach="data" t-as="rec">
+								<tr>
+									<td><t t-out="your_variable"/></td>
+									<td><t t-out="rec.name"/></td>
+									<td><t t-out="rec.phone"/></td>
+									<t t-set="your_variable" t-value="your_variable+1"/>
+								</tr>
+							</t>
+						</table>
+					</div>
+				</div>
+		</t>
+	</template>
+</odoo>

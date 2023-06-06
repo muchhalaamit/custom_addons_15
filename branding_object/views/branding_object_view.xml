@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="branding_object_tree_view">
+		<field name="name">branding.object.tree.view</field>
+		<field name="model">branding.object</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="product_name_id"/>
+				<field name="comments"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="branding_object_form_view">
+		<field name="name">branding.object.form.view</field>
+		<field name="model">branding.object</field>
+		<field name="arch" type="xml">
+			<form> 
+				<sheet>
+					<group>
+						<group>
+							<field name="product_name_id"/>
+							<field name="comments"/>
+							<field name="anything" required="1"/>
+							<field name="charges_type" widget="radio"/>
+							<field name="charges_costing"/>
+							<field name="sale_order_line_id"/>
+						</group>
+						<group>
+							<group>
+								<field name="product_image" widget="image"/>
+							</group>
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_branding_object" model="ir.actions.act_window">
+		<field name="name">Brand</field>
+		<field name="res_model">branding.object</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="branding_product" name="Branding Product" sequence="1"/>
+	
+	<menuitem id="branding_obeject"
+		name="Brand"
+		parent="branding_product"
+		action="action_branding_object"
+		sequence="2"/>
+	</data>
+
+</odoo>

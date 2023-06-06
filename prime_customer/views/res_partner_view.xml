@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="res_partner_prime_form_view" model="ir.ui.view">
+        <field name="name">res.partner.prime.form.view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='sale']" position="inside">
+
+                <field name="is_prime_customer" groups="prime_customer.group_prime_customer"/>
+                <field name="prime_discount" attrs="{'invisible':[('is_prime_customer', '=', False)], 'required':[('is_prime_customer', '=', True)]}" groups="prime_customer.group_prime_customer"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

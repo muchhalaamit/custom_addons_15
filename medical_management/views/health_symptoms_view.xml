@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<record model="ir.ui.view" id="health_symptoms_tree_view">
+		<field name="name">health.symptoms.tree.view</field>
+		<field name="model">health.symptoms</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="health_symptoms_form_view">
+		<field name="name">health.symptoms.form.view</field>
+		<field name="model">health.symptoms</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button name="action_medicine_info"
+								type="object"
+								class="oe_stat_button"
+								icon="fa-list" string="Medicine">
+						</button>
+					</div>
+					<group>
+						<field name="name"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_health_symptoms" model="ir.actions.act_window">
+		<field name="name">Health Symptoms</field>
+		<field name="res_model">health.symptoms</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="health_symptoms" name="Health Symptoms" parent="medicine_information" sequence="4" action="action_health_symptoms"/>
+</odoo>

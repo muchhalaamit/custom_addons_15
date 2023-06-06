@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="employee_details_tree_view">
+		<field name="name">employee.details.tree.view</field>
+		<field name="model">employee.details</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="employee_name"/>
+				<field name="employee_age"/>
+				<field name="employee_address"/>
+				<field name="employee_contact"/>
+				<field name="employee_email"/>
+				<field name="employee_position_id"/>
+				<field name="employee_department_id"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="employee_details_form_view">
+		<field name="name">employee.details.form.view</field>
+		<field name="model">employee.details</field>
+		<field name="arch" type="xml">
+			<form> 
+				<sheet>
+					<group>
+						<group>
+							<field name="employee_name"/>
+							<field name="employee_age"/>
+							<field name="employee_address"/>
+							<field name="employee_contact"/>
+							<field name="employee_email"/>
+							<field name="employee_position_id"/>
+							<field name="employee_department_id"/>
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="employee_details_kanban_view" model="ir.ui.view">
+		<field name="name">employee.details.kanban.view</field>
+		<field name="model">employee.details</field>
+		<field name="arch" type="xml">
+			<kanban class="o_kanban_mobile">
+				<field name="employee_name"/>
+				<field name="employee_age"/>
+				<field name="employee_email"/>
+				<field name="employee_contact"/>
+				<templates>
+					<t t-name="kanban-box">
+						<div class="oe_kanban_details">
+							<strong class="o_kanban_record_title">
+								<field name="employee_name"/>
+								<field name="employee_position_id"/>
+								<field name="employee_age"/>
+								<field name="employee_email"/>
+								<field name="employee_contact"/>
+							</strong>
+						</div>
+					</t>
+				</templates>
+			</kanban>
+		</field>
+	</record>
+
+	<record id="action_employee_details" model="ir.actions.act_window">
+		<field name="name">Employee</field>
+		<field name="res_model">employee.details</field>
+		<field name="view_mode">tree,form,kanban</field>
+	</record>
+
+	<menuitem id="aktiv_software" name="Aktiv Software" sequence="1"/>
+
+	<menuitem id="employee_details"
+		name="Employee"
+		parent="aktiv_software"
+		action="action_employee_details"
+		sequence="2"/>
+
+	</data>
+</odoo>

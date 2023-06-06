@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+library_management.access_book_author,access_book_author,library_management.model_book_author,base.group_user,1,1,1,1
+library_management.access_book_details,access_book_details,library_management.model_book_details,base.group_user,1,1,1,1
+library_management.access_register_books,access_register_books,library_management.model_register_books,base.group_user,1,1,1,1
+library_management.access_issue_book,access_issue_book,library_management.model_issue_book,base.group_user,1,1,1,1
+library_management.access_register_date,access_register_date,library_management.model_register_date,base.group_user,1,1,1,1
+library_management.access_book_type,access_book_type,library_management.model_book_type,base.group_user,1,1,1,1
+library_management.access_issue_wizard,access_issue_wizard,library_management.model_issue_wizard,base.group_user,1,1,1,1
+library_management.access_return_book,access_return_book,library_management.model_return_book,base.group_user,1,1,1,1
+library_management.access_register_data_lines,access_register_data_lines,library_management.model_register_data_lines,base.group_user,1,1,1,1
+library_management.access_context_wizard,access_context_wizard,library_management.model_context_wizard,base.group_user,1,1,1,1

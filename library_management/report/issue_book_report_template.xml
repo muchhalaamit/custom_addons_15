@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_issue_book">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <img src="/library_management/static/src/img/ganjo.jpeg"></img>
+                <h1>Hello</h1>
+                 <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h3>Customer Name:</h3>
+                                <p t-field="doc.user_name_id.name"/>
+                                <h3>Address:</h3>
+                                <p t-field="doc.address"/>
+                                <h3>Phone:</h3>
+                                <p t-field="doc.contact_no"/>
+                                <h3>Email:</h3>
+                                <p t-field="doc.email"/>
+                            </div>
+                            <div class="col-xs-6">
+                                <h3>Issue Date:</h3>
+                                <p t-field="doc.issue_date"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

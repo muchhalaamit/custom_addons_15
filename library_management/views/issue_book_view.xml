@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="issue_book_tree_view">
+		<field name="name">issue.book.tree.view</field>
+		<field name="model">issue.book</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="user_name_id"/>
+				<field name="book_lines_ids"/>
+				<field name="address"/>
+				<field name="contact_no"/>
+				<field name="email"/>
+				<field name="state" widget="badge" decoration-info="state == 'draft'"  decoration-danger="state == 'issued'" decoration-success="state == 'return'"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="issue_book_form_view">
+		<field name="name">issue.book.form.view</field>
+		<field name="model">issue.book</field>
+		<field name="arch" type="xml">
+			<form>
+				<header>
+					<button name="issue_book_view" class="oe_highlight" states="draft" string="Issue" type="object"/>
+					<button name="return_book_view" class="oe_highlight" states="issued" string="Return" type="object"/>
+					<field name="state" widget="statusbar" statusbar_visible="draft,issued,return"/>
+					<button name="issue_book_email" class="oe_highlight" string="Send Mail" type="object"/>
+				</header> 
+				<sheet>
+					<group>
+						<group>
+							<field name="user_name_id"/>
+							<field name="address"/>
+							<field name="contact_no"/>
+							<field name="email"/>
+						</group>
+						<group>
+							<field name="image" widget="image"/>
+							<label for="book_dropdwon" attrs="{'invisible': ['|', ('state', '=', 'issued'), ('state', '=', 'return')]}"/>
+							<div class="o_row" >
+								<field name="book_dropdwon" attrs="{'invisible': ['|',('state', '=', 'issued'), ('state', '=', 'return')]}"/>
+								<field name="quantity" attrs="{'invisible': ['|',('state', '=', 'issued'), ('state', '=', 'return')]}"/>
+								<button name="action_add_book" type="object" string="Add" class="oe_highlight" attrs="{'invisible': ['|',('state', '=', 'issued'), ('state', '=', 'return')]}"/>
+							</div>
+							<field name="issue_date" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+							<field name="submission_date" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+							<field name="currency_id" invisible="1"/>
+							<field name="total_charge" attrs="{'invisible': [('state', '=', 'draft')]}" widget="monetary"/>
+						</group>
+					</group>
+					<notebook attrs="{'invisible': [('user_name_id', '=', False)]}">
+                        <page string="Book details">
+                            <field name="book_lines_ids" widget="one2many_list">
+                                <tree editable="bottom">
+                                    <field name="book_name_id"/>
+                                    <field name="book_genre_ids" widget="many2many_tags"/>
+                                    <field name="issue_quantity"/>
+                                    <field name="non_return_quantity"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids"/>
+					<field name="message_ids"/>
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="employee_details_kanban_view" model="ir.ui.view">
+		<field name="name">issue.book.kanban.view</field>
+		<field name="model">issue.book</field>
+		<field name="arch" type="xml">
+			<kanban class="o_kanban_mobile">
+				<field name="user_name_id"/>
+				<field name="color"/>
+				<field name="email"/>
+				<field name="image"/>
+				<templates>
+					<t t-name="kanban-box">
+						<div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click o_has_icon oe_kanban_content oe_kanban_card">
+							<div class="oe_kanban_details">
+								<strong class="o_kanban_record_title">
+								<field name="image" widget="image" height="60" width="60" class="img-thumbnail"/>
+								<field name="user_name_id"/>
+								<field name="email"/>
+								</strong>
+							</div>
+						</div>
+					</t>
+				</templates>
+			</kanban>
+		</field>
+	</record>
+
+	<record id="action_issue_book" model="ir.actions.act_window">
+		<field name="name">Issue Book</field>
+		<field name="res_model">issue.book</field>
+		<field name="view_mode">tree,form,kanban</field>
+	</record>
+
+	<menuitem id="issue_book"
+		name="Issue Book"
+		parent="library_management"
+		action="action_issue_book"
+		sequence="4"/>
+	</data>
+</odoo>

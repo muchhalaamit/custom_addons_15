@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+bulk_product.access_bulk_product,access_bulk_product,bulk_product.model_bulk_product,base.group_user,1,1,1,1
+bulk_product.access_product_details,access_product_details,bulk_product.model_product_details,base.group_user,1,1,1,1
+bulk_product.access_split_delivery,access_split_delivery,bulk_product.model_split_delivery,base.group_user,1,1,1,1
+bulk_product.access_split_product_line,access_split_product_line,bulk_product.model_split_product_line,base.group_user,1,1,1,1

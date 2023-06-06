@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="sale_order_form_inherit_sale" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.sale</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/tree/field[@name='product_id']" position="after">
+                <field name="product_one"/>
+                <field name="product_two"/>
+            </xpath>
+            
+            <xpath expr="//form/header/field[@name='state']" position="replace">
+                <field name="state" widget="statusbar" statusbar_visible="draft,sent,sale,extra"/>
+            </xpath>
+            
+            <xpath expr="//form/header/button[@name='action_cancel']" position="replace">
+                <button name="action_cancel" type="object" string="Cancel" attrs="{'invisible': ['|', ('state', 'not in', ['draft', 'sent','sale', 'extra']), ('id', '=', False)]}" data-hotkey="z"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

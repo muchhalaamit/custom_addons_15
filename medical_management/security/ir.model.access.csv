@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+medical_management.access_medicine_information,access_medicine_information,medical_management.model_medicine_information,base.group_user,1,1,1,1
+medical_management.access_health_symptoms,access_health_symptoms,medical_management.model_health_symptoms,base.group_user,1,1,1,1
+medical_management.access_medicine_symptoms_information,access_medicine_symptoms_information,medical_management.model_medicine_symptoms_information,base.group_user,1,1,1,1
+medical_management.access_medicine_lot,access_medicine_lot,medical_management.model_medicine_lot,base.group_user,1,1,1,1

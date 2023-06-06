@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="product_show_des" name="Product Show" inherit_id="website_sale.products_item">
+        <xpath expr="//form" position="inside">
+            <!-- <h1>hello</h1> -->
+             <t t-if="product.product_desc_show">
+                <span t-att-class="product.name" t-out="product.description"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>

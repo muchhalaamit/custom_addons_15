@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="room_booking_mail_id" model="mail.template">
+		<field name="name">Room Booking Mail Template</field>
+		<field name="model_id" ref="model_hotel_room_booking"/>
+		<field name="email_from">{{object.customer_name_id.email}}</field>
+		<field name="email_to">{{object.customer_name_id.email}}</field>
+		<field name="subject">Room Booking</field>
+		<field name="body_html" type="html">
+			<div>
+				<p>Hello <t t-out="object.customer_name_id.name"/>,
+				<br/>
+				<br/>
+				This mail is sent to inform you that your room has been successfully booked.
+				<br/>
+				<br/>
+				Hotel Name: <t t-out="object.hotel_name_id.hotel_name"/>
+				<br/>
+				Room: <t t-out="object.hotel_room_booking_line_ids.hotel_room.room_code"/>
+				<br/>
+				Hotel Address: <t t-out="object.hotel_name_id.hotel_address"/>
+				</p>
+			</div>
+		</field>
+	</record>
+</odoo>

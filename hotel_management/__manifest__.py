@@ -1,0 +1,35 @@
+{
+    "name": "Hotel Management",
+    "summary": "This is a hotel management system.",
+    "description": "This module includes hotels, their rooms and other information related to hotel.",
+    "version": "15.0.0.1.0",
+    "category": "Management",
+    "website": "https://www.aktivsoftware.com",
+    "depends": ["mail", "sale", "product"],
+    "data": [
+        "security/hotel_management_security.xml",
+        "security/ir.model.access.csv",
+        "data/ir_sequence_room.xml",
+        "data/action_sale_order_merge.xml",
+        "data/booking_mail.xml",
+        "data/cancel_booking_mail.xml",
+        "data/check_out_reminder_cron.xml",
+        "data/checkout_reminder_mail.xml",
+        "views/product_line_inherit_view.xml",
+        "views/sale_order_inherit_view.xml",
+        "views/hotel_details_view.xml",
+        "views/hotel_room_view.xml",
+        "views/hotel_room_booking_view.xml",
+        "views/hotel_room_booking_line_view.xml",
+        "views/main_view.xml",
+        "wizards/cancel_button_wizard_view.xml",
+    ],
+    "assets": {
+        "web.assets_frontend": [
+            "hotel_management/static/src/js/image_preview_upload.js"
+        ],
+    },
+    "installable": True,
+    "application": True,
+    "auto_install": False,
+}

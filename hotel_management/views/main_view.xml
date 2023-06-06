@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="form_template" name = "res_data">
+        <t t-call="website.layout">
+            <div class="text-center">
+                <div class="header">
+                    <h1><b>Registration Form</b></h1>
+                </div>
+                <form action="/form/submit" model='post' data-success_page='/thanks'>
+                <span><b>Name: </b><input type="text" name="name" /></span><br/><br/>
+                <span><b>Street 1 </b><input type="text" name="street"/></span><br/><br/>
+                <span><b>Street 2 </b><input type="text" name="street2"/></span><br/><br/>
+                <span><b>Country: </b>
+                    <select id="country_name_id" name="country">
+                        <t t-foreach="country_name" t-as="rec">
+                            <option t-att-value="rec.id">
+                                <t t-out="rec.name"/>
+                            </option>
+                        </t>
+                    </select>
+                </span><br/><br/>
+                <span><b>Phone: </b><input type="text" name="phone"/></span><br/><br/>
+                <span><b>Email: </b><input type="text" name="email"/></span><br/><br/>
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <input type="file" id="avatar" name="avatar" accept="image/jpeg,image/png,image/gif"/><br/><br/>
+                <input type="hidden" name="MAX_FILE_SIZE" value="5000" />
+                <img src="" id="avatar_preview" class="avatar img-thumbnail" width="150px"/><br/><br/>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        </t>
+    </template>
+
+    <template id="thank_you_template" name = "submit_data">    
+        <h1>Thank you</h1>
+    </template>
+</odoo>

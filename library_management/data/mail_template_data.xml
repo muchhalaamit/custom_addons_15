@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="issue_book_mail_id" model="mail.template">
+		<field name="name">Issue Book Email Template</field>
+		<field name="model_id" ref="model_issue_book"/>
+		<field name="email_from">{{"amit.muchhala@icreativetechnolabs.com"}}</field>
+		<field name="email_to">{{object.email}}</field>
+		<field name="subject">Issue Book</field>
+		<field name="body_html" type="html">
+			<div>
+				<p>Hello <t t-out="object.user_name_id.name"/>,
+				<br/>
+				<br/>
+				Your book has been issued.
+				</p>
+			</div>
+		</field>
+	</record>
+</odoo>

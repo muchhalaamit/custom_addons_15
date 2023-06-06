@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="bulk_product_tree_view" model="ir.ui.view">
+			<field name="name">bulk.product.tree.view</field>
+			<field name="model">bulk.product</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="product_name_ids" widget="many2many_tags"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="bulk_product_form_view" model="ir.ui.view">
+			<field name="name">bulk.product.form.view</field>
+			<field name="model">bulk.product</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<field name="name"/>
+							<field name="product_name_ids" widget="many2many_tags"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="action_bulk_product" model="ir.actions.act_window">
+			<field name="name">Bulk Product</field>
+			<field name="res_model">bulk.product</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem id="menu_bulk_product" name="Bulk Product" sequence="1"/>
+		<menuitem id="submenu_bulk_product" action="action_bulk_product" parent="sale.sale_menu_root" name="Bulk" sequence="7"/>
+	</data>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="employee_salary_tree_view">
+		<field name="name">emplyee.salary.tree.view</field>
+		<field name="model">employee.salary</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="salary_amount"/>
+				<field name="employee_id"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="employee_salary_form_view">
+		<field name="name">emplyee.salary.form.view</field>
+		<field name="model">employee.salary</field>
+		<field name="arch" type="xml">
+			<form> 
+				<sheet>
+					<group>
+						<field name="salary_amount"/>
+						<field name="employee_id"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_employee_salary" model="ir.actions.act_window">
+		<field name="name">Salary</field>
+		<field name="res_model">employee.salary</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="employee_salary"
+		name="Salary"
+		parent="aktiv_software"
+		action="action_employee_salary"
+		sequence="5"/>
+	</data>
+</odoo>

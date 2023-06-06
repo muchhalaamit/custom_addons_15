@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_return_book">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="header" style="border-bottom: 1px solid black;"></div>
+                <h1>Hello</h1>
+                <img class="img" src="/library_management/static/src/img/ganjo.png" style="height:45%;width:100%;"/>
+                    <div class="page">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h3>Customer Name:</h3>
+                                <p t-field="doc.user_name_id.name"/>
+                                <h3>Address:</h3>
+                                <p t-field="doc.address"/>
+                                <h3>Phone:</h3>
+                                <p t-field="doc.contact_no"/>
+                                <h3>Email:</h3>
+                                <p t-field="doc.email"/>
+                            </div>
+                            <div class="col-xs-6">
+                                <h3>Return Date:</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <img class="img" src="/library_management/static/src/img/ganjo.png" style="height:45%;width:100%;"/>
+                <div class="footer" style="border-top: 1px solid black;"></div>
+                <img class="img" src="/library_management/static/src/img/ganjo.png" style="height:45%;width:100%;"/>
+            </t>
+        </t>
+    </template>
+</odoo>

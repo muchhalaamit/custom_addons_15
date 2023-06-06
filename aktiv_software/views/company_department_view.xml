@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="company_department_tree_view">
+		<field name="name">company.department.tree.view</field>
+		<field name="model">company.department</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="department_name"/>
+				<field name="employee_ids"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="company_department_form_view">
+		<field name="name">company.department.form.view</field>
+		<field name="model">company.department</field>
+		<field name="arch" type="xml">
+			<form> 
+				<sheet>
+					<group>
+						<field name="department_name"/>
+						<field name="employee_ids"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_company_department" model="ir.actions.act_window">
+		<field name="name">Department</field>
+		<field name="res_model">company.department</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="company_department"
+		name="Department"
+		parent="aktiv_software"
+		action="action_company_department"
+		sequence="4"/>
+	</data>
+</odoo>

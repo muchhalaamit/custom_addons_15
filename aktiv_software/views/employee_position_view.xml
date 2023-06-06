@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="employee_postion_tree_view">
+		<field name="name">employee.position.tree.view</field>
+		<field name="model">employee.position</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="employee_position_form_view">
+		<field name="name">employee.position.form.view</field>
+		<field name="model">employee.position</field>
+		<field name="arch" type="xml">
+			<form> 
+				<sheet>
+					<group>
+						<field name="name"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_employee_position" model="ir.actions.act_window">
+		<field name="name">Position</field>
+		<field name="res_model">employee.position</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="employee_position"
+		name="Position"
+		parent="aktiv_software"
+		action="action_employee_position"
+		sequence="3"/>
+	</data>
+</odoo>

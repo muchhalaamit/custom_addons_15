@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="return_reminder_mail" model="mail.template">
+		<field name="name">Reminder to Return Books</field>
+		<field name="model_id" ref="model_issue_book"/>
+		<field name="email_to">{{object.email}}</field>
+		<field name="subject">Books Return Reminder</field>
+		<field name="body_html" type="html">
+			<div>
+				<p>Hello <t t-out="object.user_name_id.name"/>,
+				<br/>
+				<br/>
+				You should return the books before submission date otherwise you will be charged.
+				</p>
+			</div>
+		</field>
+	</record>
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<record model="ir.ui.view" id="res_partner_inherited_form_view">
+		<field name="name">res.partner.inherited.form.view</field>
+		<field name="model">res.partner</field>
+		<field name="inherit_id" ref="base.view_partner_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//div/field[@name='company_type']" position='after'>
+				<field name="new_selection" widget="radio"/>
+			</xpath>
+			<xpath expr="//form/sheet/div[@name='button_box']" position="inside">
+				<button name="%(action_issue_book)d"
+						type="action"
+						class="oe_stat_button"
+						icon="fa-desktop"
+						attrs="{'invisible': [('new_selection', '=', 'no')]}">
+						<field string="Desktop" name="nothing" widget="statinfo"/>
+				</button>
+			</xpath>
+		</field>
+	</record>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="issue_wizard_form_view">
+        <field name="name">issue.wizard.form.view</field>
+        <field name="model">issue.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <h2>Are you confirm to issue?</h2>
+                    </group>
+                </sheet>
+                <footer>
+                    <button special="cancel" data-hotkey="z" string="Cancel" class="btn-secondary"/>
+                    <button name="action_confirm" string="Confirm" type="object" class="btn-primary" data-hotkey="q"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_issue_wizard" model="ir.actions.act_window">
+        <field name="name">Issue</field>
+        <field name="res_model">issue.wizard</field>
+        <field name="view_mode">form</field>
+    </record>
+
+</odoo>

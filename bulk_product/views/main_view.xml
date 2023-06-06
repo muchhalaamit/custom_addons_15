@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="res_partner_data_view" name="res partner data">
+		<t t-call="website.layout">
+		<div class="main_header">
+			<div class="sticky_header">
+				<h1>Sticky Header</h1>
+			</div>
+		</div>
+		<div class="row">
+			<t t-foreach="name" t-as="rec">
+				<div class="column">
+					<img t-att-src="'/web/image/res.partner/' + str(rec.id) + '/image_1920'" widget="image" class="avatar"/>
+					<p><t t-out="rec.name"/></p>
+					<p><t t-out="rec.phone"/></p>
+					<p><t t-out="rec.email"/></p>
+				</div>
+			</t>
+		</div>
+		</t>
+	</template>
+</odoo>

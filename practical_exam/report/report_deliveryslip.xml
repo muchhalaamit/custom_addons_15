@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id = "report_branding_quotation" name="Stock Inherit" inherit_id="sale.report_saleorder_document">
+		<!-- pending -->
+		<!-- using if condition check if sale_order_lines have brand field True if so give attributes to green -->
+		<xpath expr="//div[hasclass('page')]/table[1]/tbody/t[2]/tr[1]" position="attributes">
+			<attribute name="t-att-class">'text-info' if line.branding_status else ''</attribute>
+		</xpath>
+	</template>
+</odoo>

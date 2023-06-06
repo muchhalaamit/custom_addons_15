@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="sale_order_report_document_inherit" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[hasclass('page')]/table/thead/tr/th[@name='th_quantity']" position="after">
+            <th name="th_delivered" class="text-right">Delivered</th>
+        </xpath>
+        <xpath expr="//div[hasclass('page')]/table/tbody/t[2]/tr/t[1]/td[@name='td_quantity']" position="after">
+            <td name="td_delivered" class="text-right">
+                <span t-field="line.qty_delivered"/>
+            </td>
+        </xpath>
+    </template>
+</odoo>

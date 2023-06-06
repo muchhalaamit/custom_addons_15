@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="delivery_slip_report_template" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[hasclass('page')]/table[@name='stock_move_line_table']/thead/tr/th[@name='th_sml_quantity']" position="after">
+
+            <th name="product_unit_price" class="text-right">Unit Price</th>
+            <th name="product_taxes" class="text-right">Taxes</th>
+            <th name="product_subtotal" class="text-right">Subtotal</th>
+            
+        </xpath>
+
+    </template>
+
+    <template id="report_deliveryslip_inherit" inherit_id="stock.stock_report_delivery_aggregated_move_lines">
+        <xpath expr="//tr/td[@name='move_line_aggregated_qty_done']" position="after">
+
+            <td class="text-right">
+                <span t-esc="aggregated_lines[line]['unit']"/>
+            </td>
+
+            <td class="text-right">
+                <span t-esc="aggregated_lines[line]['taxes']"/>
+            </td>
+
+            <td class="text-right">
+                <span t-esc="aggregated_lines[line]['subtotal']"/>
+            </td>
+
+        </xpath>
+
+    </template>
+
+</odoo>

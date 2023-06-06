@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="hotel_room_tree_view">
+		<field name="name">hotel.room.tree.view</field>
+		<field name="model">hotel.room</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="room_code"/>
+				<field name="hotel_id"/>
+				<field name="room_type"/>
+				<field name="room_price"/>
+				<!-- <field name="state" widget="badge" decoration-info="state == 'draft'"  decoration-danger="state == 'cancel'" decoration-success="state == 'booked'"/> -->
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="hotel_room_form_view">
+		<field name="name">hotel.room.form.view</field>
+		<field name="model">hotel.room</field>
+		<field name="arch" type="xml">
+			<form> 
+				<!-- <header>
+					<button name="hotel_room_book" class="oe_highlight" states="draft" string="Book" type="object"/>
+					<button name="hotel_room_cancle" class="oe_highlight" states="booked" string="Cancle" type="object"/>
+					<field name="state" widget="statusbar" statusbar_visible="draft,booked,cancel"/>
+				</header> -->
+				<sheet>
+					<group>
+						<h2><field name="room_code"/></h2>
+					</group>
+					<group>
+						<group>
+							<field name="hotel_id"/>
+							<field name="number_of_subrooms"/>
+							<field name="room_type"/>
+							<field name="room_price"/>
+						</group>
+						<group>
+							<field name="room_discount"/>
+							<field name="discount_valid_from"/>
+							<field name="discount_valid_till"/>
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_hotel_room" model="ir.actions.act_window">
+		<field name="name">Room</field>
+		<field name="res_model">hotel.room</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+	<menuitem id="hotel_room"
+		name="Hotel Room"
+		parent="hotel_management"
+		action="action_hotel_room"
+		sequence="3"/>
+	</data>
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<record model="ir.ui.view" id="book_details_tree_view">
+		<field name="name">book.details.tree.view</field>
+		<field name="model">book.details</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="book_id"/>
+				<field name="book_name"/>
+				<field name="book_author_id"/>
+				<field name="book_quantity"/>
+				<field name="available_books"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="book_details_form_view">
+		<field name="name">book.details.form.view</field>
+		<field name="model">book.details</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button name="action_button_count"
+								type="object"
+								class="oe_stat_button"
+								icon="fa-list">
+								<field string="Book Qty" name="available_books" widget="statinfo"/>
+						</button>
+					</div>
+					<field name="image" widget="image" class="oe_avatar" options="{'zoom': true, 'preview_image':'image'}"/>
+					<group>
+						<group>
+							<field name="book_id"/>
+							<field name="book_name"/>
+							<field name="book_price"/>
+							<field name="book_code"/>
+							<field name="book_delay_charges"/>
+						</group>
+						<group>
+							<field name="book_pages"/>
+							<field name="book_author_id"/>
+							<field name="book_quantity"/>
+							<field name="book_type_ids" widget="many2many_tags"/>
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_book_details" model="ir.actions.act_window">
+		<field name="name">Book</field>
+		<field name="res_model">book.details</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="book_details"
+		name="Book"
+		parent="library_management"
+		action="action_book_details"
+		sequence="3"/>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record model="ir.module.category" id="module_hotel_management">
+		<field name="name">Hotel Management</field>
+		<field name="sequence">10</field>
+		<field name="visible" eval="0"/>
+	</record>
+
+	<record model="res.groups" id="group_receptionist">
+		<field name="name"></field>
+		<field name="category_id" ref="hotel_management.module_hotel_management"/>
+		<field name="comment">This user will have access of a receptionist.</field>
+	</record>
+
+	<!-- <record model="res.groups" id="group_manager">
+		<field name="name">Manager</field>
+		<field name="category_id" ref="hotel_management.module_hotel_management"/>
+		<field name="implied_ids" eval="[(4, ref('hotel_management.group_receptionist'))]"/>
+		<field name="comment">This user will have access of a manager.</field>
+	</record> -->
+
+	<record model="res.groups" id="group_admin">
+		<field name="name">Admin</field>
+		<field name="category_id" ref="hotel_management.module_hotel_management"/>
+		<field name="implied_ids" eval="[(4, ref('hotel_management.group_manager'))]"/>
+		<field name="comment">This user will have access of an admin.</field>
+	</record>
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="product_details_tree_view" model="ir.ui.view">
+			<field name="name">product.details.tree.view</field>
+			<field name="model">product.details</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="product_details_form_view" model="ir.ui.view">
+			<field name="name">product.details.form.view</field>
+			<field name="model">product.details</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<field name="name"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="action_product_details" model="ir.actions.act_window">
+			<field name="name">Product Details</field>
+			<field name="res_model">product.details</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem id="submenu_product_details" action="action_product_details" parent="menu_bulk_product" name="Product" sequence="3"/>
+	</data>
+</odoo>

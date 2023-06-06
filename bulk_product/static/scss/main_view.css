@@ -1,0 +1,30 @@
+.column{
+ 	margin: 10px;
+ 	border: 2px solid #0a0052;
+    text-align: center;
+    box-shadow: 10px 10px 5px grey;
+    background-color: #dedede;
+ }
+.sticky_header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    color: #dedede;
+}
+.column:hover{
+    transform: scale(1.2);
+ }
+.avatar{
+ 	margin: 0px 0px 0px 10px;
+ 	box-sizing: border-box;
+ 	width:100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 220px;
+    width: 220px;
+ }
+.row{
+    margin:0px;
+}

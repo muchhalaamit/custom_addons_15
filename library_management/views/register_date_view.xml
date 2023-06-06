@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="register_date_tree_view">
+		<field name="name">register.date.tree.view</field>
+		<field name="model">register.date</field>
+		<field name="arch" type="xml">
+			<tree decoration-danger="returned_date == False" decoration-success="returned_date != False">
+				<field name="entry_id"/>
+				<field name="issued_book_id"/>
+				<field name="book_name"/>
+				<field name="issued_date"/>
+				<field name="deadline_date"/>
+				<field name="returned_date"/>
+				<field name="book_charges"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_register_date" model="ir.actions.act_window">
+		<field name="name">Register Date</field>
+		<field name="res_model">register.date</field>
+		<field name="view_mode">tree</field>
+	</record>
+
+	<menuitem id="register_date"
+		name="Register Date"
+		parent="library_management"
+		action="action_register_date"
+		sequence="6"/>
+	</data>
+</odoo>

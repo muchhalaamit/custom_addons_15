@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record id="sale_view_branding_object_view_form" model="ir.ui.view">
+		<field name="name">sale.view.branding.object.view.form</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_order_form"/>
+		<field name="arch" type="xml">
+			 <!-- enable form view -->
+			<xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/form" position='attributes'>
+				<attribute name="editable">bottom</attribute>
+			</xpath>
+			<!-- Disable form view -->
+			<xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/tree" position='attributes'>
+				<attribute name="editable"></attribute>
+			</xpath>
+			<!-- Add brand field in sale_order_line -->
+			<xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/tree/field[@name='product_id']" position="after">
+				<field name='branding_status' invisible='1'/>
+			</xpath>
+			<!-- buttons -->
+			<xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']" position='before'>
+				<header>			
+					<button name="compute_branding_cost" type="object" class="btn-primary" string="Compute Branding Cost"/>
+					<button name="branding_reset" type="object" string="Reset"/>
+				</header> 
+			</xpath>
+			<!-- One to many of branding.object model -->
+			<xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/form/div[@name='invoice_lines']" position='after'>
+				<notebook>
+					<page string="Branding">
+						<field name="branding_product_ids">
+							<tree editable="bottom">
+								<field name="branded_product_id"/>
+								<field name="comments"/>
+								<field name="upload_logo"/>
+								<field name="charges"/>
+								<field name="charges_cost"/>
+							</tree>
+						</field>
+					</page>
+				</notebook>
+			</xpath>
+		</field>
+	</record>
+</odoo>
