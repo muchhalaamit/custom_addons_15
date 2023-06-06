@@ -1,7 +1,7 @@
-from odoo import fields,models
+from odoo import fields, models
 
 
 class ProductProduct(models.Model):
-	_inherit="product.template"
+    _inherit = "product.template"
 
-	is_branding = fields.Boolean(string="Is Branding")
+    is_branding = fields.Boolean(string="Is Branding")

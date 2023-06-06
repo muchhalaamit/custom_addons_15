@@ -33,8 +33,8 @@
 							<tree editable="bottom">
 								<field name="branded_product_id"/>
 								<field name="comments"/>
-								<field name="upload_logo"/>
-								<field name="charges"/>
+								<field name="brand_image"/>
+								<field name="charges_type"/>
 								<field name="charges_cost"/>
 							</tree>
 						</field>
