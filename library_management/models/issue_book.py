@@ -150,7 +150,6 @@ class IssueBook(models.Model):
                     offset=0,
                     limit=100,
                 )
-                print("\n\nUser Date: ", user_data)
 
     # Email sending by button
     def issue_book_email(self):

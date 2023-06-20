@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="youtube_video_tree_view">
+		<field name="name">youtube.video.tree.view</field>
+		<field name="model">youtube.video</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="video_title"/>
+				<field name="video_link"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="youtube_video_form_view">
+		<field name="name">youtube.video.form.view</field>
+		<field name="model">youtube.video</field>
+		<field name="arch" type="xml">
+			<form> 
+				<header>
+					<button name="download_video" class="oe_highlight" string="Download Video" type="object" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+					<field name="state" widget="statusbar" statusbar_visible="draft,saved,downloaded"/>
+				</header>
+				<sheet>
+					<group>
+						<field name="video_title"/>
+						<field name="video_link"/>
+						<field name="video_resolution"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_youtube_video" model="ir.actions.act_window">
+		<field name="name">Youtube</field>
+		<field name="res_model">youtube.video</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="youtube_video" name="Youtube" action="action_youtube_video" sequence="1"/>
+	
+	</data>
+
+</odoo>

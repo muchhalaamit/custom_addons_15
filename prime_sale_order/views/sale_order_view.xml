@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="sale_order_prime_form_view" model="ir.ui.view">
+        <field name="name">sale.order.prime.form.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="payment_term_id" position="after">
+                <field name="is_prime_sale"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Added a filter to filter prime sale order -->
+    <record id="sale_order_prime_order_filter_view" model="ir.ui.view">
+        <field name="name">sale.order.prime.order.filter.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/filter[@name='my_sale_orders_filter']" position="after">
+                <filter name="prime_sale_order" string="Prime Sale" domain="[('is_prime_sale', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Making prime_sale_order filter default -->
+    <record id="sale.action_quotations_with_onboarding" model="ir.actions.act_window">
+        <field name="context">{'search_default_prime_sale_order': 1, 'search_default_my_quotation': 1}</field>
+    </record>
+
+</odoo>
