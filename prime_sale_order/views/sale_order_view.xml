@@ -7,8 +7,20 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <field name="payment_term_id" position="after">
-                <field name="is_prime_sale"/>
+                <label for="is_prime_sale"/>
+                <div class="o_row">
+                    <field name="is_prime_sale"/>
+                    <button name="set_prime_sale" string="Set Prime" icon="fa-check" type="object" class="oe_link"/>
+                    <button name="clear_prime_sale" string="Clear Prime" icon="fa-times" type="object" class="oe_link"/>
+                </div>
             </field>
+
+            <!-- A button added to redirect to the sale_order_tree_view -->
+            <xpath expr="//header" position="before">
+                <header>
+                    <button name="%(sale.action_quotations_with_onboarding)d" string="To Sale Order" type="action" icon="fa-arrow-circle-left" class="oe_highlight"/>
+                </header>
+            </xpath>
         </field>
     </record>
 
