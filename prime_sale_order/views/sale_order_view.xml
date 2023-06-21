@@ -19,7 +19,20 @@
             <xpath expr="//header" position="before">
                 <header>
                     <button name="%(sale.action_quotations_with_onboarding)d" string="To Sale Order" type="action" icon="fa-arrow-circle-left" class="oe_highlight"/>
+                    <button name="copy_current_record" string="Copy Record"  type="object" class="oe_highlight"/>
+
                 </header>
+            </xpath>
+
+            <!-- Adding a smart button to show if it is a prime sale or not -->
+            <xpath expr="//sheet/div[@name='button_box']" position="inside">
+                <button name="prime_sale"
+                    icon="fa-linux"
+                    type="object"
+                    class="oe_stat_button"
+                    attrs="{'invisible': [('is_prime_sale', '=', False)]}">
+                    <field string="Orders" name="available_prime" widget="statinfo"/>
+                </button>
             </xpath>
         </field>
     </record>

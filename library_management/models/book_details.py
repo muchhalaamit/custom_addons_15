@@ -56,11 +56,7 @@ class BookDetails(models.Model):
         args = args or []
         if name:
             args = [
-                "|",
-                "|",
-                ("book_name", operator, name),
-                ("book_author_id", operator, name),
-                ("book_id", operator, name),
+            "|", "|", ("book_name", operator, name), ("book_author_id", operator, name), ("book_id", operator, name),
             ] + args
         return self._search(args, limit=limit, access_rights_uid=name_get_uid)
 

@@ -68,4 +68,4 @@ class ResPartner(models.Model):
 
     # Method for button
     def action_print(self):
-        print("\n\n\n -----------Buttn is working----------\n\n\n")
+        print("\n\n\n -----------Button is working----------\n\n\n")

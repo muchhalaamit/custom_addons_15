@@ -7,16 +7,7 @@ class StockRule(models.Model):
 
     # To get the data from sale_order_line and submit data to stock_picking
     def _get_stock_move_values(
-        self,
-        product_id,
-        product_qty,
-        product_uom,
-        location_id,
-        name,
-        origin,
-        company_id,
-        values,
-    ):
+        self, product_id, product_qty, product_uom, location_id, name, origin, company_id, values):
         move_values = super()._get_stock_move_values(
             product_id,
             product_qty,

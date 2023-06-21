@@ -105,16 +105,14 @@ class IssueBook(models.Model):
         for rec in self.book_lines_ids:
             book_line_list.append(
                 (
-                    0,
-                    0,
-                    {
+                    0, 0, {
                         "book_id": rec.book_name_id.id,
                         "issued_quantity": rec.issue_quantity,
                         "return_quantity": rec.non_return_quantity,
                         "remaining_quantity": rec.non_return_quantity,
-                    },
+                        },
+                    )
                 )
-            )
         return {
             "type": "ir.actions.act_window",
             "name": "Return Book",
