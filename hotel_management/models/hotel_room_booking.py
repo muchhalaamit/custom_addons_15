@@ -11,53 +11,27 @@ class HotelRoomBooking(models.Model):
     _rec_name = "hotel_name_id"
 
     hotel_name_id = fields.Many2one("hotel.details", string="Hotel")
-    customer_name_id = fields.Many2one(
-        "res.partner", string="Customer Name", required=True
-    )
+    customer_name_id = fields.Many2one("res.partner", string="Customer Name", required=True)
     customer_contact = fields.Char(string="Contact No")
     customer_address = fields.Text(string="Address")
     check_in_datetime = fields.Datetime(string="Check-in date & time", required=True)
     check_out_datetime = fields.Datetime(string="Check-out date & time", required=True)
     state = fields.Selection(
-        selection=[("draft", "Draft"), ("booked", "Booked"), ("cancel", "Cancel")],
-        string="Status",
-        required=True,
-        readonly=True,
-        copy=False,
-        tracking=True,
-        default="draft",
-    )
-    hotel_room_booking_line_ids = fields.One2many(
-        "hotel.room.booking.line", "hotel_room_booking_id", string="Line"
-    )
+        selection=[("draft", "Draft"), ("booked", "Booked"), ("cancel", "Cancel")], string="Status",
+        required=True, readonly=True, copy=False, tracking=True, default="draft")
+    hotel_room_booking_line_ids = fields.One2many("hotel.room.booking.line", "hotel_room_booking_id", string="Line")
 
     # To fill fields of book code, book name and author name while selecting user
     @api.onchange("customer_name_id")
     def _onchange_name_detail(self):
         for rec in self:
             if rec.customer_name_id:
-                res_data = self.env["res.partner"].search(
-                    [("id", "=", rec.customer_name_id.id)]
-                )
+                res_data = self.env["res.partner"].search([("id", "=", rec.customer_name_id.id)])
                 rec.customer_contact = res_data.phone
                 if not res_data.street2:
-                    rec.customer_address = (
-                        str(res_data.street)
-                        + "\n"
-                        + str(res_data.zip)
-                        + "\n"
-                        + str(res_data.city)
-                    )
+                    rec.customer_address = (str(res_data.street) + "\n" + str(res_data.zip) + "\n" + str(res_data.city))
                 else:
-                    rec.customer_address = (
-                        str(res_data.street)
-                        + "\n"
-                        + str(res_data.street2)
-                        + "\n"
-                        + str(res_data.zip)
-                        + "\n"
-                        + str(res_data.city)
-                    )
+                    rec.customer_address = (str(res_data.street) + "\n" + str(res_data.street2) + "\n" + str(res_data.zip) + "\n" + str(res_data.city))
 
     # button to cancle the room
     def hotel_room_cancel(self):
@@ -96,11 +70,9 @@ class HotelRoomBooking(models.Model):
     def cron_chechout_reminder(self):
         all_data = self.env["hotel.room.booking"].search([])
         for rec in all_data:
-            if (
-                rec.check_out_datetime > datetime.now()
+            if (rec.check_out_datetime > datetime.now()
                 and rec.state == "booked"
-                and rec.check_out_datetime.hour - datetime.now().hour == 1
-            ):
+                and rec.check_out_datetime.hour - datetime.now().hour == 1):
                 template = self.env.ref("hotel_management.checkout_reminder_mail_id").id
                 template_id = self.env["mail.template"].browse(template)
                 template_id.send_mail(rec.id, force_send=True)
@@ -109,8 +81,5 @@ class HotelRoomBooking(models.Model):
     @api.constrains("customer_name_id")
     def check_every_details(self):
         for rec in self:
-            if (
-                rec.check_in_datetime < datetime.now()
-                and rec.check_out_datetime <= datetime.now()
-            ):
+            if (rec.check_in_datetime < datetime.now() and rec.check_out_datetime <= datetime.now()):
                 raise ValidationError("Entered date and time is invalid.")

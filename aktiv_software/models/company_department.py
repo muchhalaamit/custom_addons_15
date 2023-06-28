@@ -9,6 +9,4 @@ class CompanyDepartment(models.Model):
     _rec_name = "department_name"
 
     department_name = fields.Char(string="Department")
-    employee_ids = fields.One2many(
-        "employee.details", "employee_department_id", string="Employees"
-    )
+    employee_ids = fields.One2many("employee.details", "employee_department_id", string="Employees")

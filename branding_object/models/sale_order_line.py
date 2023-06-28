@@ -12,11 +12,8 @@ class SaleOrder(models.Model):
         for rec in self.order_line:
             if rec.branding_object_ids.charges_type == "percentage":
                 rec.branding_object_ids.charges_costing = (
-                    rec.price_unit * rec.branding_object_ids.charges_costing
-                ) / 100
-                rec.price_unit = (
-                    rec.price_unit + rec.branding_object_ids.charges_costing
-                )
+                    rec.price_unit * rec.branding_object_ids.charges_costing) / 100
+                rec.price_unit = (rec.price_unit + rec.branding_object_ids.charges_costing)
 
     def reset_lines(self):
         """This method will remove all branding lines from the sale order line."""
@@ -26,6 +23,4 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
-    branding_object_ids = fields.One2many(
-        "branding.object", "sale_order_line_id", string="Brand Object"
-    )
+    branding_object_ids = fields.One2many("branding.object", "sale_order_line_id", string="Brand Object")

@@ -30,15 +30,8 @@ class HotelRoomBookingLine(models.Model):
     def onchange_room_price(self):
         for rec in self:
             room_data = self.env["hotel.room"].search([("id", "=", rec.hotel_room.id)])
-            print(room_data)
             if rec.hotel_room:
-                if (
-                    room_data.discount_valid_from
-                    < date.today()
-                    < room_data.discount_valid_till
-                ):
-                    rec.price = room_data.room_price - (
-                        (room_data.room_price * room_data.room_discount) / 100
-                    )
+                if (room_data.discount_valid_from < date.today() < room_data.discount_valid_till):
+                    rec.price = room_data.room_price - ((room_data.room_price * room_data.room_discount) / 100)
                 else:
                     rec.price = rec.hotel_room.room_price

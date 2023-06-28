@@ -26,9 +26,7 @@ class SaleOrder(models.Model):
             rec.order_line = False
             if rec.service_id != False:
                 order_line_data = self.env["sale.order.line"]
-                template_data = self.env["bulk.product"].search(
-                    [("id", "=", rec.service_id.id)]
-                )
+                template_data = self.env["bulk.product"].search([("id", "=", rec.service_id.id)])
                 for line in template_data.product_name_ids:
                     vals = {
                         "order_id": self.id,

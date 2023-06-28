@@ -6,9 +6,7 @@ class ReturnBook(models.TransientModel):
     _name = "return.book"
     _description = "Return Book wizard"
 
-    return_book_ids = fields.One2many(
-        "register.data.lines", "relation_id", string="Select Books"
-    )
+    return_book_ids = fields.One2many("register.data.lines", "relation_id", string="Select Books")
 
     # To return book
     def action_confirm(self):
@@ -24,9 +22,7 @@ class ReturnBook(models.TransientModel):
                 for book in range(rec.return_book_ids.return_quantity):
                     return_book_date[book].returned_date = date.today()
             # To change the state to return
-            register_date_lines = self.env["register.date"].search(
-                [("entry_id", "=", self._context["active_id"])]
-            )
+            register_date_lines = self.env["register.date"].search([("entry_id", "=", self._context["active_id"])])
             for res in register_date_lines:
                 date_list = []
                 if res.returned_date:
@@ -34,9 +30,7 @@ class ReturnBook(models.TransientModel):
                 else:
                     date_list.append(False)
             if all(date_list):
-                self.env["issue.book"].search(
-                    [("id", "=", self._context["active_id"])]
-                ).write({"state": "return"})
+                self.env["issue.book"].search([("id", "=", self._context["active_id"])]).write({"state": "return"})
 
 
 class RegisterDateLines(models.TransientModel):

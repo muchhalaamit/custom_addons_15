@@ -19,7 +19,7 @@
                 </notebook>
                 <footer>
                     <button special="cancel" data-hotkey="z" string="Cancel" class ="btn-secondary"/>
-                    <button name = "action_confirm" data-hotkey="o" string="Return All" type="object" class="btn-primary"/>
+                    <button name = "action_confirm" data-hotkey="o" string="Return" type="object" class="btn-primary"/>
                 </footer>
             </form>
         </field>

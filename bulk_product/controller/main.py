@@ -29,27 +29,16 @@ class Test(WebsiteSale):
         type="http",
         auth="public",
         website=True,
-        sitemap=sitemap_shop,
-    )
-    def shop(
-        self,
-        page=0,
-        category=None,
-        search="",
-        min_price=0.0,
-        max_price=0.0,
-        ppg=False,
-        **post
-    ):
+        sitemap=sitemap_shop)
+    def shop(self, page=0, category=None, search="", min_price=0.0, max_price=0.0, ppg=False, **post):
         print(":::::::::::::::::::inherit before")
         res = super(Test, self).shop(
-            page=page,
-            category=category,
-            search=search,
-            min_price=min_price,
-            max_price=max_price,
-            ppg=ppg,
-            **post
-        )
+                page=page,
+                category=category,
+                search=search,
+                min_price=min_price,
+                max_price=max_price,
+                ppg=ppg,
+                **post)
         print(":::::::::::::::::::inherit after")
         return res

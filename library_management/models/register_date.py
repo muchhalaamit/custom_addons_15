@@ -6,6 +6,7 @@ from datetime import date, timedelta
 
 class RegisterDate(models.Model):
     _name = "register.date"
+    _description = "Register Date"
     _rec_name = "book_name"
 
     entry_id = fields.Integer(string="Entry Id")
@@ -31,13 +32,7 @@ class RegisterDate(models.Model):
     def _compute_book_charges(self):
         self.book_charges = 0
         for rec in self:
-            issued_book_charge = (
-                self.env["book.details"]
-                .search([("book_name", "=", rec.book_name)])
-                .book_delay_charges
-            )
+            issued_book_charge = (self.env["book.details"].search([("book_name", "=", rec.book_name)]).book_delay_charges)
             if not rec.returned_date and str(date.today()) > str(rec.deadline_date):
-                rec.book_charges += issued_book_charge + (
-                    issued_book_charge * (date.today() - rec.deadline_date).days // 5
-                )
+                rec.book_charges += issued_book_charge + (issued_book_charge * (date.today() - rec.deadline_date).days // 5)
                 rec.final_charge = rec.book_charges

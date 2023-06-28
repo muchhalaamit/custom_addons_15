@@ -14,9 +14,8 @@ class BrandingObject(models.Model):
     comments = fields.Char(string="Comments", required=True)
     product_image = fields.Image(string="Product Image")
     charges_type = fields.Selection(
-        selection=[("fixed", "Fixed"), ("percentage", "Percentage")],
-        string="Charges Type",
-    )
+            selection=[("fixed", "Fixed"), ("percentage", "Percentage")],
+            string="Charges Type")
     charges_costing = fields.Float(string="Charge Costing(%)")
     sale_order_line_id = fields.Many2one("sale.order.line", string="Brand")
     anything = fields.Char(string="Anything")

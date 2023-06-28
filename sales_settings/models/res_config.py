@@ -13,15 +13,9 @@ class ResConfigSettings(models.TransientModel):
 
     def set_values(self):
         res = super(ResConfigSettings, self).set_values()
-        self.env["ir.config_parameter"].sudo().set_param(
-            "sales_settings.discount_limit", self.discount_limit
-        )
-        self.env["ir.config_parameter"].sudo().set_param(
-            "sales_settings.product_description", self.product_description
-        )
-        self.env["ir.config_parameter"].sudo().set_param(
-            "sales_settings.res_partner_id", self.res_partner_id.id
-        )
+        self.env["ir.config_parameter"].sudo().set_param("sales_settings.discount_limit", self.discount_limit)
+        self.env["ir.config_parameter"].sudo().set_param("sales_settings.product_description", self.product_description)
+        self.env["ir.config_parameter"].sudo().set_param("sales_settings.res_partner_id", self.res_partner_id.id)
         return res
 
     @api.model
@@ -30,11 +24,7 @@ class ResConfigSettings(models.TransientModel):
         setting_values = self.env["ir.config_parameter"].sudo()
         res.update(
             discount_limit=setting_values.get_param("sales_settings.discount_limit"),
-            product_description=setting_values.get_param(
-                "sales_settings.product_description"
-            ),
-            res_partner_id=int(
-                setting_values.get_param("sales_settings.res_partner_id")
-            ),
-        )
+            product_description=setting_values.get_param("sales_settings.product_description"),
+            res_partner_id=int(setting_values.get_param("sales_settings.res_partner_id")),
+            )
         return res

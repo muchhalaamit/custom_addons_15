@@ -15,13 +15,13 @@ class MedicineInformation(models.Model):
     reference_number = fields.Char(string="Reference Number")
     manufacturer = fields.Char(string="Manufacturer")
     is_major = fields.Boolean(string="Is major?")
+    
     # expiry_month = fields.Integer(string="Expiry Months")
-    dosage_form = fields.Selection(
-        selection=[("tablet", "Tablet"), ("capsule", "Capsule"), ("liquid", "Liquid")],
-        string="Dosage Form",
-    )
+    dosage_form = fields.Selection(selection=[("tablet", "Tablet"), ("capsule", "Capsule"), ("liquid", "Liquid")], string="Dosage Form")
+    
     # symptoms_id = fields.Many2one("health.symptoms", string="Symptoms")
     manufacture_date = fields.Date(string="Manufacturing Date")
+    
     # remaining_months = fields.Char(string="Remaining Months", compute="compute_remaining_months")
     expiry_date = fields.Date(string="Expiry Date")
 
@@ -44,18 +44,12 @@ class MedicineInformation(models.Model):
 
     # name_search method
     @api.model
-    def _name_search(
-        self, name, args=None, operator="ilike", limit=100, name_get_uid=None
-    ):
+    def _name_search(self, name, args=None, operator="ilike", limit=100, name_get_uid=None):
         args = args or []
         if name:
-            args = [
-                "|",
-                "|",
-                ("medicine_name", operator, name),
-                ("reference_number", operator, name),
-                ("expiry_date", operator, name),
-            ]
+            args = ["|", "|", ("medicine_name", operator, name),
+                    ("reference_number", operator, name),
+                    ("expiry_date", operator, name)]
         return self._search(args, limit=limit, access_rights_uid=name_get_uid)
 
     # Write method if expiry date is less than current date:
@@ -73,13 +67,7 @@ class MedicineInformation(models.Model):
     def create(self, vals):
         if not vals.get("name"):
             seq = self.env["ir.sequence"].next_by_code("medicine.information")
-            vals["batch_no"] = (
-                seq[0:3]
-                + "/"
-                + datetime.date.today().strftime("%b").upper()
-                + "/"
-                + seq[3:]
-            )
+            vals["batch_no"] = (seq[0:3] + "/" + datetime.date.today().strftime("%b").upper() + "/" + seq[3:])
         return super(MedicineInformation, self).create(vals)
 
     # To fill the manufacturing date if the medicine name is present:

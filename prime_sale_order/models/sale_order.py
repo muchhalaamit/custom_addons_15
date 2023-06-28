@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import json
+
 from odoo import fields, models, api
 from odoo.exceptions import ValidationError
 
@@ -7,6 +9,7 @@ from odoo.exceptions import ValidationError
 class SaleOrder(models.Model):
 	_inherit = "sale.order"
 
+	sale_order_total = fields.Char(string="Sale Order Total", compute="_compute_total")
 	available_prime = fields.Integer()
 	is_prime_sale = fields.Boolean(
 		string="Prime Sale Order",
@@ -52,3 +55,30 @@ class SaleOrder(models.Model):
 			raise ValidationError("This record is prime. It can't be copied.")
 		else:
 			self.copy()
+
+	# context pass in write method
+	def write(self, values):
+		ctx = dict(self._context)
+		ctx.update({"write_context": "passed"})
+		self = self.with_context(ctx)
+		res = super(SaleOrder, self).write(values)
+		return res
+
+	# passing the context when the action_confirm is called and stock_picking is created
+	def action_confirm(self):
+		ctx = dict(self._context)
+		ctx.update({"current_model": "sale"})
+		self = self.with_context(ctx)
+		res = super(SaleOrder, self).action_confirm()
+		return res
+
+	# Method for random button
+	def random_button(self):
+		current_user = self.user_id.id
+		print(self.read())
+		sale_orders = self.env["sale.order"].search([("user_id", "=", current_user)])
+
+	# A method for compute field sale_order_total
+	def _compute_total(self):
+		for rec in self:
+			rec.sale_order_total = json.loads(rec.tax_totals_json)["amount_total"]

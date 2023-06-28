@@ -55,14 +55,7 @@ class SaleOrder(models.Model):
             ("done", "Locked"),
             ("cancel", "Cancelled"),
             ("extra", "Extra"),
-        ],
-        string="Status",
-        readonly=True,
-        copy=False,
-        index=True,
-        tracking=3,
-        default="draft",
-    )
+        ], string="Status", readonly=True, copy=False, index=True, tracking=3, default="draft")
 
     def action_confirm(self):
         res = super().action_confirm()
@@ -74,15 +67,9 @@ class SaleOrder(models.Model):
     def action_merge_quotation(self):
         if len(self.partner_id.ids) == 1 and all(rec.state == "draft" for rec in self):
             self.action_cancel()
-            new_rcord = self.create(
-                {
-                    "partner_id": self.partner_id.ids[0],
-                }
-            )
+            new_rcord = self.create({"partner_id": self.partner_id.ids[0],})
             for lines in self.order_line:
                 lines.copy({"order_id": new_rcord.id})
             new_rcord.action_confirm()
         else:
-            raise ValidationError(
-                "Selected records are having different partners or the state is not quotation."
-            )
+            raise ValidationError("Selected records are having different partners or the state is not quotation.")

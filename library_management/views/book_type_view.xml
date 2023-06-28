@@ -22,6 +22,7 @@
 					<group>
 						<field name="name"/>
 						<field name="nation_select" widget="radio"/>
+						<field name="random_field"/>
 					</group>
 				</sheet>
 			</form>

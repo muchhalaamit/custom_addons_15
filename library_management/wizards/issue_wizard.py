@@ -6,12 +6,11 @@ from datetime import date, timedelta
 
 class IssueWizard(models.TransientModel):
     _name = "issue.wizard"
+    _description = "Issue Wizard"
 
     # Wizard to cofirm the issue.bok
     def action_confirm(self):
-        issue_book_record = self.env["issue.book"].search(
-            [("id", "=", self._context.get("active_id"))]
-        )
+        issue_book_record = self.env["issue.book"].search([("id", "=", self._context.get("active_id"))])
         issue_book_record.write({"state": "issued"})
         issue_book_record.issue_date = date.today()
         issue_book_record.submission_date = date.today() + timedelta(days=15)

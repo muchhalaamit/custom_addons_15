@@ -13,6 +13,7 @@
                     <button name="set_prime_sale" string="Set Prime" icon="fa-check" type="object" class="oe_link"/>
                     <button name="clear_prime_sale" string="Clear Prime" icon="fa-times" type="object" class="oe_link"/>
                 </div>
+                <field name="sale_order_total"/>
             </field>
 
             <!-- A button added to redirect to the sale_order_tree_view -->
@@ -20,7 +21,7 @@
                 <header>
                     <button name="%(sale.action_quotations_with_onboarding)d" string="To Sale Order" type="action" icon="fa-arrow-circle-left" class="oe_highlight"/>
                     <button name="copy_current_record" string="Copy Record"  type="object" class="oe_highlight"/>
-
+                    <button name="random_button" string="Random Button"  type="object" class="oe_highlight"/>
                 </header>
             </xpath>
 
@@ -49,7 +50,7 @@
         </field>
     </record>
 
-    <!-- Making prime_sale_order filter default -->
+    <!-- Making prime_sale_order filter default by inheriting an action -->
     <record id="sale.action_quotations_with_onboarding" model="ir.actions.act_window">
         <field name="context">{'search_default_prime_sale_order': 1, 'search_default_my_quotation': 1}</field>
     </record>

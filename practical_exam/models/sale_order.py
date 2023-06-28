@@ -8,9 +8,7 @@ class SaleOrder(models.Model):
         """method to add sale_order_lines if preesed 'Compute Branding Cost' button"""
         for rec in self:
             if rec.order_line:
-                branding_records = self.env["branding.object"].search(
-                    [("sale_order_line_id", "=", rec.order_line.ids)]
-                )
+                branding_records = self.env["branding.object"].search([("sale_order_line_id", "=", rec.order_line.ids)])
                 for record in branding_records:
                     if record.branded_product_id:
                         if record.charges_type == "fixed":
@@ -40,7 +38,5 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
-    branding_product_ids = fields.One2many(
-        "branding.object", "sale_order_line_id", string="Product"
-    )
+    branding_product_ids = fields.One2many("branding.object", "sale_order_line_id", string="Product")
     branding_status = fields.Boolean(string="Brand")

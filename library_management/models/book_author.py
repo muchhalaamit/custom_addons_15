@@ -4,6 +4,7 @@ from odoo import fields, models, api
 
 class BookAuthor(models.Model):
     _name = "book.author"
+    _description = "Book Author"
     _rec_name = "author_name"
 
     author_name = fields.Char(string="Author Name")
@@ -16,14 +17,8 @@ class BookAuthor(models.Model):
     @api.onchange("country")
     def set_values_to(self):
         if self.country:
-            ids = self.env["res.country.state"].search(
-                [("country_id", "=", self.country.id)]
-            )
-            return {
-                "domain": {
-                    "state": [("id", "in", ids.ids)],
-                }
-            }
+            ids = self.env["res.country.state"].search([("country_id", "=", self.country.id)])
+            return {"domain": {"state": [("id", "in", ids.ids)]}}
 
 
 class ResPartner(models.Model):

@@ -5,11 +5,11 @@ from odoo import fields, models, api, _
 
 class BookType(models.Model):
     _name = "book.type"
+    _description = "Book Type"
 
     name = fields.Char(string="Book Genre")
-    nation_select = fields.Selection(
-        selection=[("india", "India"), ("pakistan", "Pakistan")], string="Nation"
-    )
+    nation_select = fields.Selection(selection=[("india", "India"), ("pakistan", "Pakistan")], string="Nation")
+    random_field = fields.Char(string="Random", default="Random")
 
     # _sql_constraints = [
     #         ('code_name', 'unique (name)', 'Book name must be unique !')
@@ -52,10 +52,7 @@ class SaleOrder(models.Model):
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    new_selection = fields.Selection(
-        selection=[("yes", "Button Visible"), ("no", "Button Not Visible")],
-        default="no",
-    )
+    new_selection = fields.Selection(selection=[("yes", "Button Visible"), ("no", "Button Not Visible")], default="no")
     nothing = fields.Char(string="Nothing")
 
     @api.onchange("new_selection")

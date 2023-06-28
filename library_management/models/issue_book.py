@@ -7,6 +7,7 @@ from datetime import date, timedelta
 
 class IssueBook(models.Model):
     _name = "issue.book"
+    _description = "Issue Book"
     _inherit = "mail.thread"
     _rec_name = "user_name_id"
 
@@ -60,30 +61,14 @@ class IssueBook(models.Model):
         for rec in self:
             rec.email = ""
             if rec.user_name_id:
-                res_data = self.env["res.partner"].search(
-                    [("id", "=", rec.user_name_id.id)]
-                )
+                res_data = self.env["res.partner"].search([("id", "=", rec.user_name_id.id)])
                 rec.email = res_data.email
                 rec.contact_no = res_data.phone
                 rec.image = res_data.image_1920
                 if not res_data.street2:
-                    rec.address = (
-                        str(res_data.street)
-                        + "\n"
-                        + str(res_data.zip)
-                        + "\n"
-                        + str(res_data.city)
-                    )
+                    rec.address = (str(res_data.street) + "\n" + str(res_data.zip) + "\n" + str(res_data.city))
                 else:
-                    rec.address = (
-                        str(res_data.street)
-                        + "\n"
-                        + str(res_data.street2)
-                        + "\n"
-                        + str(res_data.zip)
-                        + "\n"
-                        + str(res_data.city)
-                    )
+                    rec.address = (str(res_data.street) + "\n" + str(res_data.street2) + "\n" + str(res_data.zip) + "\n" + str(res_data.city))
 
     # Wizard on issue button
     def action_issue_wizard(self):
@@ -103,16 +88,12 @@ class IssueBook(models.Model):
     def return_book_view(self):
         book_line_list = []
         for rec in self.book_lines_ids:
-            book_line_list.append(
-                (
-                    0, 0, {
-                        "book_id": rec.book_name_id.id,
-                        "issued_quantity": rec.issue_quantity,
-                        "return_quantity": rec.non_return_quantity,
-                        "remaining_quantity": rec.non_return_quantity,
-                        },
-                    )
-                )
+            book_line_list.append((0, 0, {
+                    "book_id": rec.book_name_id.id,
+                    "issued_quantity": rec.issue_quantity,
+                    "return_quantity": rec.non_return_quantity,
+                    "remaining_quantity": rec.non_return_quantity,
+                        }))
         return {
             "type": "ir.actions.act_window",
             "name": "Return Book",
@@ -122,12 +103,11 @@ class IssueBook(models.Model):
             "context": {"default_return_book_ids": book_line_list},
         }
 
-    # This is commented becaus ondelete="cascade" added in a field.
     # To unlink the data if data is deleted from issue.book
-    # def unlink(self):
-    #   for line in self.book_lines_ids:
-    #       self.env["register.books"].search([("id", "=", line.id)]).unlink()
-    #   return super(IssueBook, self).unlink()
+    def unlink(self):
+      for line in self.book_lines_ids:
+          self.env["register.books"].search([("id", "=", line.id)]).unlink()
+      return super(IssueBook, self).unlink()
 
     # search_read method to get email, contact and address
     @api.onchange("user_name_id")
@@ -136,18 +116,8 @@ class IssueBook(models.Model):
             if rec.user_name_id:
                 user_data = self.env["res.partner"].search_read(
                     [("id", "=", rec.user_name_id.id)],
-                    [
-                        "email",
-                        "phone",
-                        "street",
-                        "street2",
-                        "zip",
-                        "city",
-                        "image_1920",
-                    ],
-                    offset=0,
-                    limit=100,
-                )
+                    ["email", "phone", "street", "street2", "zip", "city", "image_1920"],
+                    offset=0, limit=100)
 
     # Email sending by button
     def issue_book_email(self):
@@ -170,22 +140,16 @@ class IssueBook(models.Model):
         for rec in self:
             rec.total_charge = 0
             if rec.issue_date:
-                single_charge = self.env["register.date"].search(
-                    [("entry_id", "=", rec.id)]
-                )
+                single_charge = self.env["register.date"].search([("entry_id", "=", rec.id)])
                 for book in single_charge:
                     rec.total_charge += book.final_charge
 
     # To add book to book_line_ids
     def action_add_book(self):
         for line in self.book_lines_ids:
-            self.env["register.books"].search(
-                [("id", "=", line.id)]
-            ).issue_book_data = line.id
+            self.env["register.books"].search([("id", "=", line.id)]).issue_book_data = line.id
 
-        book_data = self.env["book.details"].search(
-            [("id", "=", self.book_dropdwon.id)]
-        )
+        book_data = self.env["book.details"].search([("id", "=", self.book_dropdwon.id)])
         vals = {
             "book_name_id": self.book_dropdwon.id,
             "issue_quantity": self.quantity,
@@ -195,13 +159,8 @@ class IssueBook(models.Model):
             self.write({"book_lines_ids": [(0, 0, vals)]})
         else:
             for lines in self.book_lines_ids:
-                register_book_data = self.env["register.books"].search(
-                    [("id", "=", lines.id)]
-                )
-                if (
-                    book_data.id == lines.book_name_id.id
-                    and lines.id == register_book_data.issue_book_data
-                ):
+                register_book_data = self.env["register.books"].search([("id", "=", lines.id)])
+                if (book_data.id == lines.book_name_id.id and lines.id == register_book_data.issue_book_data):
                     value_update = {
                         "issue_quantity": lines.issue_quantity + self.quantity,
                     }
@@ -228,28 +187,12 @@ class IssueBook(models.Model):
     @api.constrains("book_lines_ids")
     def check_book(self):
         for rec in self.book_lines_ids:
-            if (
-                self.env["register.books"].search_count(
-                    [
-                        ("book_name_id", "=", rec.book_name_id.id),
-                        ("empty_field", "=", self.id),
-                    ]
-                )
-                > 1
-            ):
+            if (self.env["register.books"].search_count([("book_name_id", "=", rec.book_name_id.id), ("empty_field", "=", self.id)]) > 1):
                 raise ValidationError("Selected book is already added in the list.")
 
     # Constrain to check if same customer record is in draft state or not
     @api.constrains("user_name_id")
     def check_user_state(self):
         for rec in self:
-            if (
-                rec.search_count(
-                    [
-                        ("user_name_id", "=", rec.user_name_id.id),
-                        ("state", "=", "draft"),
-                    ]
-                )
-                > 1
-            ):
+            if (rec.search_count([("user_name_id", "=", rec.user_name_id.id), ("state", "=", "draft")]) > 1):
                 raise ValidationError("The user is already in draft state.")

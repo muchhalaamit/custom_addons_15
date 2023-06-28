@@ -10,16 +10,11 @@ class CancelWizard(models.TransientModel):
     select_cancel = fields.Selection(
         selection=[
             ("cancel", "Cancel Booking"),
-            ("cancel_mail", "Cancel Booking and Send Mail"),
-        ],
-        string="Cancel Room",
-    )
+            ("cancel_mail", "Cancel Booking and Send Mail")], string="Cancel Room")
 
     # Wizard to cofirm the issue.bok
     def action_confirm(self):
-        booking_detail = self.env["hotel.room.booking"].search(
-            [("id", "=", self._context.get("active_id"))]
-        )
+        booking_detail = self.env["hotel.room.booking"].search([("id", "=", self._context.get("active_id"))])
         booking_detail.write({"state": "cancel"})
         if self.select_cancel == "cancel_mail":
             template = self.env.ref("hotel_management.booking_cancel_mail_id").id
