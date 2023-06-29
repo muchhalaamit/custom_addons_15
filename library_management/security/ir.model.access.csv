@@ -9,3 +9,4 @@ library_management.access_issue_wizard,access_issue_wizard,library_management.mo
 library_management.access_return_book,access_return_book,library_management.model_return_book,base.group_user,1,1,1,1
 library_management.access_register_data_lines,access_register_data_lines,library_management.model_register_data_lines,base.group_user,1,1,1,1
 library_management.access_context_wizard,access_context_wizard,library_management.model_context_wizard,base.group_user,1,1,1,1
+library_management.access_wizard_wizard,access_wizard_wizard,library_management.model_wizard_wizard,base.group_user,1,1,1,1

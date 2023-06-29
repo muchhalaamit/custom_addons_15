@@ -25,6 +25,7 @@
         "wizards/issue_wizard_view.xml",
         "wizards/return_book_wizard_view.xml",
         "wizards/context_wizard_view.xml",
+        "wizards/wizard_wizard_view.xml",
         "report/issue_book_report.xml",
         "report/issue_book_report_template.xml",
         "report/return_book_report.xml",

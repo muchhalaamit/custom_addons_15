@@ -17,6 +17,7 @@
 			<form>
 				<header>
 					<button name="context_data_pass" context="{'ctx':nation_select}" class="oe_highlight" string="Nation" type="object"/>
+					<button name="wizard_button" class="oe_highlight" string="Wizard" type="object"/>
 				</header>
 				<sheet>
 					<group>

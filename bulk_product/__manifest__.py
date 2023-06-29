@@ -2,7 +2,7 @@
     "name": "Bulk Product",
     "version": "15.0.0",
     "description": """This module of Bulk product""",
-    "depends": ["sale", "product", "website", "stock"],
+    "depends": ["sale_management", "website", "stock"],
     "data": [
         "security/ir.model.access.csv",
         "data/split_delivery_action.xml",

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="wizard_wizard_form_view">
+        <field name="name">wizard.wizard.form.view</field>
+        <field name="model">wizard.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <h2>This is a normal wizard which opened on button click.</h2>
+                    </group>
+                    <group>
+                        <field name="name"/>
+                        <field name="age"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button special="cancel" data-hotkey="z" string="Cancel" class="btn-secondary"/>
+                    <button name="action_confirm" string="Confirm" type="object" class="btn-primary" data-hotkey="q"/>
+                    <button name="%(return_reminder_mail)d" string="Random Button" type="action" class="oe_highlight"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wizard_wizard" model="ir.actions.act_window">
+        <field name="name">Wizard</field>
+        <field name="res_model">wizard.wizard</field>
+        <field name="view_mode">form</field>
+    </record>
+
+</odoo>

@@ -40,6 +40,18 @@ class BookType(models.Model):
             "target": "new",
         }
 
+    # Extra button named "Wizard" for practice purpose only
+    def wizard_button(self):
+        print(self._context.get("active_id"))
+        print("\n\n\n\n:_:_:_:_:_:_:_:_:Wizard Button Pressed:_:_:_:_:_:_:_:_:\n\n\n")
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "wizard.wizard",
+            "name": _("Wizard"),
+            "view_mode": "form",
+            "target": "new",
+        }
+
 
 # Use of inheritance and changing the view of sale order form and added the page named "Anything"
 class SaleOrder(models.Model):
