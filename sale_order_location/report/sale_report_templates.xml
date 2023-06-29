@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <template id="report_sale_location" inherit_id="sale.report_saleorder_document">
+        
+        <!-- The headed location is created in report. -->
+        <xpath expr="//div[hasclass('page')]/table/thead/tr/th[@name='th_quantity']" position="after">
+            <th name="th_delivered" class="text-right">Location</th>
+        </xpath>
+        
+        <!-- The data of location is added in lines. -->
+        <xpath expr="//div[hasclass('page')]/table/tbody/t[2]/tr/t[1]/td[@name='td_quantity']" position="after">
+            <td name="td_delivered" class="text-right">
+                <span t-field="line.product_location_id"/>
+            </td>
+        </xpath>
+
+    </template>
+</odoo>

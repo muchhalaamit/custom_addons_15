@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="sale_order_confirm_proceed_form_view" model="ir.ui.view">
+        <field name="name">sale.order.confirm.proceed.form.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <!-- product_location_id field added to sale_order_line  -->
+            <xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="after">
+                <field name="product_location_id" groups="sale_order_location.group_sale_order_location"/>
+            </xpath>
+
+            <!-- A button named "Confirm Stock & Proceed" added -->
+            <xpath expr="//header" position="inside">
+                <button name="confirm_stock_proceed" string="Confirm Stock and Proceed" type="object" class="oe_highlight" attrs="{'invisible': [('confirm_proceed', '=', True)]}" groups="sale_order_location.group_sale_order_location"/>
+            </xpath>
+
+            <!-- Boolean field -->
+            <field name="payment_term_id" position="after">
+                <field name="confirm_proceed" groups="sale_order_location.group_sale_order_location" attrs="{'readonly': [('state', 'not in', ['draft', 'sent'])]}"/>
+            </field>
+
+            <!-- Hidden confirm button -->
+            <xpath expr="//header/button[@id='action_confirm']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('state', 'not in', ['sent']), ('confirm_proceed', '!=', True)]}</attribute>
+            </xpath>
+
+            <xpath expr="//header/button[8]" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('state', 'not in', ['draft']), ('confirm_proceed', '!=', True)]}</attribute>
+            </xpath>
+            
+        </field>
+    </record>
+
+</odoo>
+

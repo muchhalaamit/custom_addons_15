@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- GGroup named "Inventory Manager" -->
+    <record id="group_sale_order_location" model="res.groups">
+        <field name="name">Inventory Manager</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+</odoo>
+
