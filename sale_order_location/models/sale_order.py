@@ -15,8 +15,7 @@ class SaleOrder(models.Model):
 		for rec in self.order_line:
 			# stock_quant_data = self.env["stock.quant"].search([("product_id", "=", rec.product_id.id)]).mapped("location_id")
 			# for i in stock_quant_data:
-			# 	for j in i.quant_ids:
-			# 		print("\n\n\n", i.name, j.available_quantity)
+			# 		print("\n\n\n", i.name, "----", i.quant_ids.available_quantity)
 			if rec.product_location_id.id == False:
 				raise ValidationError("The location is not selected. Please select the location.")
 			else:		
