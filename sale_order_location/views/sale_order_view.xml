@@ -9,7 +9,7 @@
 
             <!-- product_location_id field added to sale_order_line  -->
             <xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="after">
-                <field name="product_location_id" groups="sale_order_location.group_sale_order_location"/>
+                <field name="product_location_id" groups="sale_order_location.group_sale_order_location" context="{'product_id': product_id}"/>
             </xpath>
 
             <!-- A button named "Confirm Stock & Proceed" added -->

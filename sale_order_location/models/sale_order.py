@@ -13,6 +13,10 @@ class SaleOrder(models.Model):
 		"""A custom button added to raise a validation if location is empty and
 		to get access of Confirm button."""
 		for rec in self.order_line:
+			# stock_quant_data = self.env["stock.quant"].search([("product_id", "=", rec.product_id.id)]).mapped("location_id")
+			# for i in stock_quant_data:
+			# 	for j in i.quant_ids:
+			# 		print("\n\n\n", i.name, j.available_quantity)
 			if rec.product_location_id.id == False:
 				raise ValidationError("The location is not selected. Please select the location.")
 			else:		
