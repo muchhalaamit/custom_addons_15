@@ -14,7 +14,7 @@
 
             <!-- A button named "Confirm Stock & Proceed" added -->
             <xpath expr="//header" position="inside">
-                <button name="confirm_stock_proceed" string="Confirm Stock and Proceed" type="object" class="oe_highlight" attrs="{'invisible': [('confirm_proceed', '=', True)]}" groups="sale_order_location.group_sale_order_location"/>
+                <button name="confirm_stock_proceed" string="Confirm Stock and Proceed" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('confirm_proceed', '=', True), ('state', 'not in', ['draft', 'sent'])]}" groups="sale_order_location.group_sale_order_location"/>
             </xpath>
 
             <!-- Boolean field -->
