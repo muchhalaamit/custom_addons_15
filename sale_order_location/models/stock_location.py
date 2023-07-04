@@ -23,8 +23,10 @@ class Location(models.Model):
 			location_data = self.env["stock.quant"].search([("product_id", "=", product_id)])
 			if location_data:
 				for quant in location_data:
+					print(rec.name)
+					print(quant.location_id.name)
 					if quant.quantity > 0:
-						name = f"{quant.location_id.name} - {quant.quantity}"
+						name = f"{quant.location_id.name} - {rec.name} - {quant.quantity}"
 						result.append((rec.id, name))
 			else:
 				name = rec.name
