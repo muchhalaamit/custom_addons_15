@@ -22,13 +22,15 @@ class Location(models.Model):
 			product_id = self._context.get("product_id")
 			location_data = self.env["stock.quant"].search([("product_id", "=", product_id)])
 			if location_data:
-				for quant in location_data[0]:
-					name = f"{quant.location_id.name} - {quant.quantity}"
-					result.append((rec.id, name))
+				for quant in location_data:
+					if quant.quantity > 0:
+						name = f"{quant.location_id.name} - {quant.quantity}"
+						result.append((rec.id, name))
 			else:
 				name = rec.name
 				result.append((rec.id, name))
 		return result
+
 
 	# def name_get(self):
 	# 	"""This method will show the location of selected roduct with available quantity."""
